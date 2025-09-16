@@ -67,3 +67,7 @@ export default tseslint.config([
   },
 ])
 ```
+
+
+1. npm i react-router-dom
+2. npx shadcn@latest init

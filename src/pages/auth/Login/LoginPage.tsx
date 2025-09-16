@@ -4,6 +4,7 @@ import SrmLogo from "../../../assets/images/srm_login_logo.png";
 import TrophyImage from "../../../assets/images/login_cup_img.png";
 import loginBg from "../../../assets/images/login_left_img.png";
 import { Eye ,EyeClosed } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import "./Login.module.css";
 
 
@@ -11,27 +12,39 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // Implement login logic here
+    navigate('/home');
+    
+  }
 
   return (
     <div className="min-h-screen flex">
      
-      <div className="w-1/2  ba  flex flex-col text-white p-10 relative" 
+      <div className="w-1/2  ba  flex flex-col text-white p-10 relative  items-baseline" 
        style={{
     backgroundImage: `linear-gradient(rgba(0,128,0,0.6), rgba(0,128,0,0.6)), url(${loginBg})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
   }}
       >
-        <img src={SrmLogo} alt="SRM Logo" className="mb-6 w-28" />
-        <img src={TrophyImage} alt="Trophy" className="mb-6 w-40" />
+        <img src={SrmLogo} alt="SRM Logo"  className="w-24 sm:w-32 md:w-40 lg:w-40 xl:w-40 max-w-full h-auto mb-6"  />
+
+        <div className="mt-[50px]">
+          
+          <img src={TrophyImage} alt="Trophy"  className="w-24 sm:w-32 md:w-40 lg:w-40 xl:w-40 max-w-full h-auto mb-6"  />
         <h1 className="text-[40px] font-bold mb-4">
-          Welcome to the Excellence Awards Platform
+          Welcome to the Excellence <br /> Awards Platform
         </h1>
-        <p className="max-w-md">
+        <p className="max-w-md text-[16px]">
           Discover, recognize, and celebrate outstanding projects from SRM
           innovators. Login to explore award-winning work, give your feedback,
           and celebrate excellence together.
         </p>
+        </div>
+       
       </div>
 
      
@@ -40,7 +53,7 @@ export default function Login() {
           <h2 className="text-2xl font-bold text-gray-900 text-center">
             Welcome Back!
           </h2>
-          <p className="text-center text-gray-500 mb-6">
+          <p  className="text-center text-gray-500 mb-6">
             Sign in to your account
           </p>
 
@@ -85,7 +98,7 @@ export default function Login() {
           </div>
 
           {/* Sign In Button */}
-          <button className="w-full bg-green-700 text-white py-2 rounded-lg hover:bg-green-800 transition">
+          <button onClick={handleLogin} className="w-full bg-green-700 text-white py-2 rounded-lg hover:bg-green-800 transition">
             Sign In
           </button>
 
