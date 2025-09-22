@@ -8,23 +8,43 @@ import { useNavigate } from "react-router-dom";
 import "./Login.module.css";
 
 
+
+type UserRole = 'user' | 'manager';
+
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-const handleLogin = () => {
-  if (!email || !password) {
-    alert("Please enter both email and password");
-    return;
-  }
-  if (email === "user@gmail.com" && password === "user123") {
-    navigate("/home");
-  } else {
-    alert("Invalid email or password");
-  }
-};
+  const handleLogin = () => {
+    if (!email || !password) {
+      alert('Please enter both email and password');
+      return;
+    }
+
+    let role: UserRole | null = null;
+
+    if (email === 'user@gmail.com' && password === '1') {
+      role = 'user';
+    } else if (email === 'manager@gmail.com' && password === '2') {
+      role = 'manager';
+    } else {
+      alert('Invalid email or password');
+      return;
+    }
+
+    // Store role in localStorage or context
+    localStorage.setItem('userRole', role);
+
+    // Navigate based on role
+    if (role === 'manager') {
+      navigate('/approvals');
+    } else {
+      navigate('/home');
+    }
+  };
 
 
   return (

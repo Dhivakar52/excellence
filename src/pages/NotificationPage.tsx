@@ -1,6 +1,5 @@
 
 import React , {useState} from 'react';
-
 import { Bell} from 'lucide-react';
 import NotificationModal from '../components/Notification/NotificationModal';
 

@@ -7,7 +7,8 @@ import {
   LogOut, 
   Menu, 
   X ,
-  ChevronLeft
+  ChevronLeft,
+  CircleCheckBig
 } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/layout_logo.png'
@@ -24,15 +25,18 @@ interface NavigationItem {
   icon: React.ElementType;
   label: string;
   path: string;
+  roles?: ('user' | 'manager')[];
 }
 
 
 
+
 const navigationItems: NavigationItem[] = [
-  { icon: Home, label: 'Home', path: '/home' },
-  { icon: Bell, label: 'Notifications', path: '/notifications' },
-  { icon: User, label: 'Self Nominations', path: '/self-nominations' },
-  { icon: FileText, label: 'My Nominations', path: '/my-nominations' },
+  { icon: Home, label: 'Home', path: '/home', roles: ['user', 'manager'] },
+  { icon: Bell, label: 'Notifications', path: '/notifications', roles: ['user', 'manager'] },
+  { icon: User, label: 'Self Nominations', path: '/self-nominations', roles: ['user', 'manager'] },
+  { icon: FileText, label: 'My Nominations', path: '/my-nominations', roles: ['user', 'manager'] },
+  { icon: CircleCheckBig, label: 'Approvals', path: '/approvals', roles: ['manager'] }, 
 ];
 
 
@@ -48,7 +52,7 @@ const activeStyle = {
   borderLeft: '4px solid white',
   color: 'white',
 };
-
+const userRole = localStorage.getItem('userRole') as 'user' | 'manager' | null;
 
   return (
     <>
@@ -101,31 +105,30 @@ const activeStyle = {
 
         {/* Navigation */}
         <nav className="p-3 space-y-2">
-          {navigationItems.map((item) => {
-           const isActive =
+        {navigationItems
+  .filter(item => !item.roles || item.roles.includes(userRole!))
+  .map((item) => {
+    const isActive =
       item.path === '/my-nominations'
         ? location.pathname.startsWith('/my-nominations')
         : location.pathname === item.path;
-            return (
-              <Link
-                key={item.label}
-                to={item.path}
-                onClick={onMobileClose}
-                className={`
-                  flex items-center px-4 py-3 rounded-xl cursor-pointer
-                 
-                 
-                  ${(isCollapsed && !isMobileOpen) ? 'justify-center px-2' : ''}
-                `}
-                style={isActive ? activeStyle : {}}
-              >
-                <item.icon size={20} className="flex-shrink-0" />
-                {(!isCollapsed || isMobileOpen) && (
-                  <span className="ml-3 text-sm">{item.label}</span>
-                )}
-              </Link>
-            );
-          })}
+
+    return (
+      <Link
+        key={item.label}
+        to={item.path}
+        onClick={onMobileClose}
+        className={`
+          flex items-center px-4 py-3 rounded-xl cursor-pointer
+          ${(isCollapsed && !isMobileOpen) ? 'justify-center px-2' : ''}
+        `}
+        style={isActive ? activeStyle : {}}
+      >
+        <item.icon size={20} className="flex-shrink-0" />
+        {(!isCollapsed || isMobileOpen) && <span className="ml-3 text-sm">{item.label}</span>}
+      </Link>
+    );
+  })}
         </nav>
 
         {/* Logout */}
