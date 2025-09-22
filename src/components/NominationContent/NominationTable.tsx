@@ -58,7 +58,7 @@ const NominationTable: React.FC<TableProps> = ({ nominations }) => {
     <>
     <div className="bg-white rounded-xl shadow-sm overflow-hidden">
       {/* Desktop Table */}
-      <div className="hidden lg:block overflow-x-auto">
+      <div className=" overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
@@ -127,7 +127,7 @@ const NominationTable: React.FC<TableProps> = ({ nominations }) => {
       </div>
 
       {/* Mobile Cards */}
-      <div className="lg:hidden">
+      {/* <div className="lg:hidden">
         {nominations.map((nomination, index) => (
           <div key={index} className="p-4 border-b border-gray-100 last:border-b-0">
             <div className="flex justify-between items-start mb-3">
@@ -164,7 +164,7 @@ const NominationTable: React.FC<TableProps> = ({ nominations }) => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
     
     <Outlet />

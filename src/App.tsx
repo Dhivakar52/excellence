@@ -3,10 +3,10 @@ import Layout from './layout/Layout';
 import NominationPage from './pages/NominationPage';
 import AddNomination from './components/NominationContent/AddNomination';
 import HomePage from './pages/HomePage';
+import SelfNominationPage from './pages/SelfNominationPage';
 import Login from './pages/auth/Login/LoginPage';
 
 const NotificationsPage = () => <div className="text-2xl font-bold">Notifications</div>;
-const SelfNominationsPage = () => <div className="text-2xl font-bold">Self Nominations</div>;
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
         <Route element={<Layout />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
-          <Route path="/self-nominations" element={<SelfNominationsPage />} />
+          <Route path="/self-nominations" element={<SelfNominationPage />} />
           <Route path="/my-nominations">
             <Route index element={<NominationPage />} />
             <Route path="add-nomination" element={<AddNomination />} />

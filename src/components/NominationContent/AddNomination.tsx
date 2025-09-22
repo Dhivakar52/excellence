@@ -27,6 +27,9 @@ export default function AddNomination() {
 
   return (
     <>
+    <div  className='p-5'>
+
+ 
   <button onClick={handleBackward} className="flex items-center text-blue-600 bg-white border-gray-100 rounded-sm px-2 py-1   font-medium"> <span className="me-2"><ArrowLeft size={14}/></span> Back</button>
 
 
@@ -211,7 +214,7 @@ export default function AddNomination() {
         </button>
         <button
           type="submit"
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+          className="px-4 py-2 btn-theme"
         >
           Submit Nomination
         </button>
@@ -219,6 +222,8 @@ export default function AddNomination() {
     </form>
 
     <Outlet />
+
+       </div>
     </>
   );
 }

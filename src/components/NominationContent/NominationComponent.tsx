@@ -85,7 +85,7 @@ const NominationComponent = () => {
        <div className=" border-b border-gray-200 mb-6 lg:mb-8 overflow-x-auto">
                  <Tabs.Root defaultValue="table" className="">
         {/* Tab Buttons */}
-        <Tabs.List className="flex w-[30%] border-b border-gray-300 mb-4">
+        <Tabs.List className="flex md:w-[30%] sm:w-[50%] border-b border-gray-300 mb-4">
           <Tabs.Trigger
             value="table"
             className="flex-1 text-sm px-4 py-2 text-center data-[state=active]:border-b-2 data-[state=active]:border-green-500 data-[state=active]:text-green-600 hover:bg-gray-100"

@@ -15,3 +15,10 @@
 .nominate-form [role="combobox"] {
   border-color: #00000033 !important;
 }
+
+.btn-theme{
+    background: linear-gradient(90deg, rgb(8, 128, 94) 16%, rgb(24, 97, 174) 100%);
+    border-left: 4px solid white;
+    color: white;
+    border-radius: 9px;
+}

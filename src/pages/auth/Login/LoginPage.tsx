@@ -14,11 +14,18 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Implement login logic here
-    navigate('/home');
-    
+const handleLogin = () => {
+  if (!email || !password) {
+    alert("Please enter both email and password");
+    return;
   }
+  if (email === "user@gmail.com" && password === "user123") {
+    navigate("/home");
+  } else {
+    alert("Invalid email or password");
+  }
+};
+
 
   return (
     <div className="min-h-screen flex">

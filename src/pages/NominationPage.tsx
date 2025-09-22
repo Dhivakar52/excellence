@@ -6,7 +6,7 @@ const NominationPage = () => {
 
   return (
     
-          <div>
+          <div className='p-5'>
             <NominationComponent/>
           </div>
 
