@@ -1,24 +1,27 @@
 // src/pages/auth/Login.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SrmLogo from "../../../assets/images/srm_login_logo.png";
 import TrophyImage from "../../../assets/images/login_cup_img.png";
 import loginBg from "../../../assets/images/login_left_img.png";
 import { Eye ,EyeClosed } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { USER_ROLES , type UserRole } from "../../../dataTypes/roles";
 import "./Login.module.css";
 
 
 
-type UserRole = 'user' | 'manager';
+interface LoginProps {
+  setUserRole: React.Dispatch<React.SetStateAction<UserRole | null | undefined>>;
+}
 
 
-export default function Login() {
+export default function Login({ setUserRole }: LoginProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+ const handleLogin = () => {
     if (!email || !password) {
       alert('Please enter both email and password');
       return;
@@ -26,23 +29,29 @@ export default function Login() {
 
     let role: UserRole | null = null;
 
-    if (email === 'user@gmail.com' && password === '1') {
-      role = 'user';
-    } else if (email === 'manager@gmail.com' && password === '2') {
-      role = 'manager';
-    } else {
+    if (email === "user@gmail.com" && password === "1") role = USER_ROLES.USER;
+    else if (email === "manager@gmail.com" && password === "2") role = USER_ROLES.MANAGER;
+    else if (email === "jury@gmail.com" && password === "3") role = USER_ROLES.JURY;
+    else if (email === "presidentUnit@gmail.com" && password === "4") role = USER_ROLES.PRESIDENT_UNIT;
+    else if (email === "presidentLevel@gmail.com" && password === "5") role = USER_ROLES.PRESIDENT_LEVEL;
+    else if (email === "admin@gmail.com" && password === "6") role = USER_ROLES.ADMIN;
+    else {
       alert('Invalid email or password');
       return;
     }
 
-    // Store role in localStorage or context
+    // ✅ Update localStorage and App state
     localStorage.setItem('userRole', role);
+    setUserRole(role);
 
     // Navigate based on role
-    if (role === 'manager') {
-      navigate('/approvals');
-    } else {
-      navigate('/home');
+    switch (role) {
+      case USER_ROLES.MANAGER: navigate('/approvals'); break;
+      case USER_ROLES.JURY: navigate('/business-jury'); break;
+      case USER_ROLES.PRESIDENT_UNIT: navigate('/president-unit'); break;
+      case USER_ROLES.PRESIDENT_LEVEL: navigate('/president-level'); break;
+      case USER_ROLES.ADMIN: navigate('/admin'); break;
+      default: navigate('/home');
     }
   };
 
