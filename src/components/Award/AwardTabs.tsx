@@ -1,4 +1,4 @@
-import React from 'react';
+
 import * as Tabs from '@radix-ui/react-tabs';
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import MediaManagement from './MediaManagement';
 import RecognitionList from './RecognitionList';
 
 const AwardTabs = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const tabs = [
     { value: '0', label: 'Award Ceremony Setup', content: (

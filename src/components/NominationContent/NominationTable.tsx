@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React  from 'react';
 import { Menu } from 'lucide-react';
 import  type Nomination  from '../../dataTypes/nomination';
 import { Outlet } from "react-router-dom";

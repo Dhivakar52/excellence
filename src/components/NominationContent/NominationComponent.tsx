@@ -1,9 +1,9 @@
-import React from 'react'
+
 import FilterComponent from '../FilterComponent';
 import NominationTable from './NominationTable';
 import  type Nomination  from '../../dataTypes/nomination';
 import * as Tabs from '@radix-ui/react-tabs';
-import { Outlet, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 
 
@@ -67,7 +67,7 @@ const nominations: Nomination[] = [
   }
 ];
 const NominationComponent = () => {
-    const [activeTab, setActiveTab] = React.useState<'my' | 'others'>('my');
+    // const [activeTab, setActiveTab] = React.useState<'my' | 'others'>('my');
 
     const navigate=useNavigate();
 

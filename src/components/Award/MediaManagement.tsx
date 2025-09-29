@@ -14,9 +14,9 @@ const MediaManagement: React.FC = () => {
     console.log("Upload script");
   };
 
-  const handleUploadGallery = () => {
-    console.log("Upload gallery");
-  };
+  // const handleUploadGallery = () => {
+  //   console.log("Upload gallery");
+  // };
 
   const handleViewGallery = () => {
     console.log("View gallery");

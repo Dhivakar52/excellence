@@ -1,5 +1,5 @@
 // src/pages/auth/Login.tsx
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import SrmLogo from "../../../assets/images/srm_login_logo.png";
 import TrophyImage from "../../../assets/images/login_cup_img.png";
 import loginBg from "../../../assets/images/login_left_img.png";

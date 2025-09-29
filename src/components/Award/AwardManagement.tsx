@@ -1,5 +1,5 @@
 
-import React from 'react'
+
 import AwardTabs from './AwardTabs'
 
 const AwardManagement = () => {

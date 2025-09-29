@@ -2,7 +2,7 @@ import * as Label from "@radix-ui/react-label";
 import * as Select from "@radix-ui/react-select";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+
 
 export default function AddNomination() {
   const [referrals, setReferrals] = useState([
