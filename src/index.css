@@ -22,3 +22,7 @@
     color: white;
     border-radius: 9px;
 }
+
+table td{
+  font-size: 13px;
+}

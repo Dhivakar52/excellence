@@ -11,15 +11,23 @@ import ApprovalComponent from './components/ManagerPage/ApprovalComponent';
 import BusinessJury from './components/Jury/BusinessJury';
 import PresidentLevel from './components/PresidentLevel/PresidentLevel';
 import PresidentUnit from './components/PresidentUnitLevel/PresidentUnit';
-// import Admin from './components/Admin/AdminComponent';
 import AdminInner from './components/AdminSetting/AdminInner';
-import AwardManagement from './components/AdminSetting/AwardManagement';
+import AwardCategories from './components/AdminSetting/AwardCategories';
+import EntitiesDepartments from './components/AdminSetting/EntitiesDepartments';
+import JuryEvaluationConfiguration from './components/AdminSetting/JuryEvaluationConfiguration';
+import JuryRoleMapping from './components/AdminSetting/JuryRoleMapping';
+import RoleAccessLevels from './components/AdminSetting/RoleAccessLevels';
+import NominationCycleMaster from './components/AdminSetting/NominationCycleMaster';
+import JuryPanelSetup from './components/AdminSetting/JuryPanelSetup';
+import AwardManagement from './components/Award/AwardManagement';
 import Login from './pages/auth/Login/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import type { UserRole } from './dataTypes/roles';
 import { ROLE_PAGES } from './dataTypes/roles';
 
-// ✅ Map all main pages (excluding Add Nomination nested)
+// -------------------------
+// Main page components
+// -------------------------
 const pageComponents: Record<string, React.ReactNode> = {
   'Home': <HomePage />,
   'Notifications': <NotificationsPage />,
@@ -33,20 +41,49 @@ const pageComponents: Record<string, React.ReactNode> = {
   'Admin Setting': <AdminInner />,
 };
 
-// ✅ Role lookup with fallback for Add Nomination
+// -------------------------
+// Admin sub-pages
+// -------------------------
+const adminSubPages: Record<string, React.ReactNode> = {
+  'award-categories': <AwardCategories />,
+  'entities-departments': <EntitiesDepartments />,
+  'nomination-cycle': <NominationCycleMaster />,
+  'jury-panel-setup': <JuryPanelSetup />,
+  'jury-evaluation-settings': <JuryEvaluationConfiguration />,
+  'jury-role-mapping': <JuryRoleMapping />,
+  'role-list': <RoleAccessLevels />,
+};
+
+// -------------------------
+// Allowed roles for admin sub-pages
+// -------------------------
+const adminSubPageRoles: Record<string, UserRole[]> = {
+  'award-categories': ['admin'],
+  'entities-departments': ['admin'],
+  'nomination-cycle': ['admin'],
+  'jury-panel-setup': ['admin'],
+  'jury-evaluation-settings': ['admin'],
+  'jury-role-mapping': ['admin'],
+  'role-list': ['admin'],
+};
+
+// -------------------------
+// Get allowed roles for main pages
+// -------------------------
 const getAllowedRoles = (pageLabel: string): UserRole[] => {
   const matches = Object.entries(ROLE_PAGES)
     .filter(([_, pages]) => pages.includes(pageLabel))
     .map(([role]) => role as UserRole);
 
-  // If Add Nomination not present, fallback to all roles from ROLE_PAGES
   if (matches.length === 0) {
-    const allRoles = Object.keys(ROLE_PAGES) as UserRole[];
-    return allRoles;
+    return Object.keys(ROLE_PAGES) as UserRole[];
   }
   return matches;
 };
 
+// -------------------------
+// App Component
+// -------------------------
 const App: React.FC = () => {
   const [userRole, setUserRole] = useState<UserRole | null | undefined>(undefined);
 
@@ -55,22 +92,21 @@ const App: React.FC = () => {
     setUserRole(storedRole);
   }, []);
 
-  if (userRole === undefined) {
-    return null; // wait for role
-  }
+  if (userRole === undefined) return null; // wait for role
 
   return (
     <Router>
       <Routes>
-        {/* Public Route */}
+        {/* Public login route */}
         <Route path="/" element={<Login setUserRole={setUserRole} />} />
 
-        {/* Protected Routes */}
+        {/* Protected routes */}
         <Route element={<Layout />}>
-          {/* Dynamic mapping */}
+          {/* Main pages */}
           {Object.entries(pageComponents).map(([label, component]) => {
-            const path = '/' + label.toLowerCase().replace(/\s+/g, '-'); // "My Nominations" -> "/my-nominations"
+            const path = '/' + label.toLowerCase().replace(/\s+/g, '-');
             const allowedRoles = getAllowedRoles(label);
+
             return (
               <Route
                 key={label}
@@ -84,11 +120,30 @@ const App: React.FC = () => {
             );
           })}
 
-          {/* ✅ Explicit nested Add Nomination route */}
+          {/* Admin sub-pages */}
+          {Object.entries(adminSubPages).map(([slug, component]) => (
+            <Route
+              key={slug}
+              path={`/admin-setting/${slug}`}
+              element={
+                <ProtectedRoute
+                  userRole={userRole}
+                  allowedRoles={adminSubPageRoles[slug]}
+                >
+                  {component}
+                </ProtectedRoute>
+              }
+            />
+          ))}
+
+          {/* Add Nomination nested route */}
           <Route
             path="/my-nominations/add-nomination"
             element={
-              <ProtectedRoute userRole={userRole} allowedRoles={getAllowedRoles('Add Nomination')}>
+              <ProtectedRoute
+                userRole={userRole}
+                allowedRoles={getAllowedRoles('Add Nomination')}
+              >
                 <AddNomination />
               </ProtectedRoute>
             }

@@ -1,9 +1,13 @@
 import React from 'react'
+import AdminMainPage from './AdminMainPage'
 
 const AdminInner = () => {
   return (
-    <div>
-        <h1>Inner Admin</h1>
+    <div className='p-4'>
+       <h3>Admin Setting</h3>
+       <p>Manage system configuration, users, and permissions</p>
+       <AdminMainPage/>
+
     </div>
   )
 }

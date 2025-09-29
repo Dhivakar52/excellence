@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  Home, Bell, User, FileText, LogOut, Menu, X, Gavel, CircleCheckBig ,Users ,Settings
+  Home, Bell, User, FileText, LogOut, ChevronLeft , X, Gavel, CircleCheckBig ,Users ,Settings
 } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/layout_logo.png';
@@ -59,7 +59,13 @@ const allowedPages = userRole ? ROLE_PAGES[userRole] : [];
         ${isCollapsed ? 'lg:w-20' : 'lg:w-64'} ${isMobileOpen ? 'w-64' : 'w-0 lg:w-20'} ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} overflow-hidden`}>
         
         <button onClick={onMobileClose} className="absolute top-4 right-4 lg:hidden w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"><X size={16} /></button>
-        <button onClick={onToggle} className="hidden lg:block absolute -right-3 top-5 w-6 h-6 bg-white text-gray-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200"><Menu size={16} /></button>
+        {/* <button onClick={onToggle} className=" lg:block absolute -right-3 z-20 top-5 w-6 h-6 bg-white text-gray-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200"><ChevronLeft size={16} /></button> */}
+          <button
+        onClick={onToggle}
+        className="lg:block absolute -right-3 z-20 top-5 w-6 h-6 bg-white text-gray-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200"
+      >
+        <ChevronLeft size={16} />
+      </button>
 
         <div className="p-5 flex items-center border-b-1 shadow-lg border-white/10 min-h-[70px]">
           {(!isCollapsed || isMobileOpen) && <img src={logo} alt="logo" className='w-[106px] h-[40px]' />}

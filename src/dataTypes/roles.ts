@@ -16,5 +16,11 @@ export const ROLE_PAGES: Record<UserRole, string[]> = {
   jury: ['Home', 'Notifications', 'Self Nominations', 'My Nominations','Add Nomination', 'Approvals', 'Business Jury'],
   presidentUnit: ['Home', 'Notifications', 'Self Nominations', 'My Nominations','Add Nomination', 'Approvals', 'President Unit'],
   presidentLevel: ['President Level'],
-  admin: ['Home', 'Notifications', 'Self Nominations','Add Nomination', 'My Nominations', 'Approvals', 'Business Jury', 'President Unit', 'President Level','Award Management','Admin Setting'],
+  admin: 
+  ['Home', 'Notifications',
+     'Self Nominations','Add Nomination', 
+     'My Nominations', 'Approvals', 
+     'Business Jury', 'President Unit', 
+     'President Level','Award Management',
+     'Admin Setting'],
 };
